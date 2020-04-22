@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <div class="container bg-dark">
+    <div class="container bg-light">
         <div class="row">
             <div class="col-lg-12 d-flex justify-content-center">
                 <img src="assets/images/destinations.png" class= "responsive border"> 
@@ -19,11 +19,24 @@
         </div>
 
         <div class="row mt-2">
-            <div class="col-lg-12">
-                <h2 class= "text-center text-light">PRESS ANY KEY TO GET STARTED</h2>
+            <div class="col-lg-12 text center">
+                <h2 class= "text-center">PRESS ANY KEY TO GET STARTED</h2>
+                <div>Current Word:</div><br>
                     <div class = "underscores"></div>
-                    <div class = "rightGuess"></div>
-                    <div class = "wrongGuess"></div>
+                    <div>
+                        Total Wins:
+                        <div class = "rightGuess"></div><br>
+                    </div>
+                    <div> 
+                        Number of Guesses Left:
+                        <p id= "numberofGuesses"></p>
+                    </div>
+                        Letters Already Guessed:
+                        <div class = "wrongGuess"></div>
+                    </div> <br>
+                    <div>
+                        Total Losses: 
+                        <p class = "losses"></p>
                     </div>
             </div>
             </div>

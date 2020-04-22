@@ -4,9 +4,17 @@ var destinations = ["naples","budapest","bali","waco","singapore","tokyo","chica
 
 //choose word randomly
 var computerGuess = destinations[Math.floor(Math.random() * destinations.length)];
+
+//global variables
 var rightLetter =[];
 var wrongLetter =[];
 var underScore =[];
+
+//counter variables
+var wins = 0;
+var losses = 0;
+var maxGuess = 15;
+var numGuess =0 ;
 
 //testing
 console.log(computerGuess);
@@ -18,11 +26,18 @@ var generateUnderscore = function(){
     }return underScore;
 }
 
-console.log(generateUnderscore());
-
 //user guess
     document.onkeyup = function(event) {
-    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+
+//everytime the user guesses, increase the number of guesses
+numGuess++;
+maxGuess--;
+if (maxGuess == 0) {
+    alert ("you're out of guesses!");
+}
+
 
 //if userGuess letter that is correct
     if ((computerGuess.indexOf(userGuess) > -1)){
@@ -32,11 +47,13 @@ console.log(generateUnderscore());
 
  //replacing underscore with letter       
         underScore[computerGuess.indexOf(userGuess)] = userGuess;
+        console.log(computerGuess.indexOf(userGuess));
 
   //if all underscores filled, user wins and score on screen will increase   
-
+  
     if(underScore.join('') == computerGuess){
         alert('you win!');
+        wins++;
     } 
         
     }
@@ -44,12 +61,24 @@ console.log(generateUnderscore());
     else {
         wrongLetter.push(userGuess);
         }
+
 //once user gets right answer or reaches max guesses, the game will randomly choose another word
 
 
+console.log(underScore);
 console.log(computerGuess.indexOf(userGuess));
+console.log(userGuess);
 console.log(rightLetter);
 console.log(wrongLetter);
+
+
+//dom manipulation
+
+document.querySelector('.underscores').textContent = underScore.join(' ');
+document.querySelector('#numberofGuesses').textContent = maxGuess;
+document.querySelector('.wrongGuess').textContent = wrongLetter.join(' ,');
+document.querySelector('.rightGuess').textContent = wins;
+document.querySelector('.losses').textContent = losses;
 
 };
 
