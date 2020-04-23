@@ -1,7 +1,6 @@
 body{
     font-family: 'Bebas Neue', cursive;
     letter-spacing: 2px;
-    background-image: url("assets/images/background.jpg");
     background-color:black;
    
 }
@@ -10,9 +9,6 @@ body{
     background-color:#ffffff;
 }
 
-.header{
-    background-image: url("assests/images/Destinations.jpg");
-}
 
 .responsive{
     align:center;
