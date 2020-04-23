@@ -1,93 +1,141 @@
-
 //computer choices for words
-var destinations = ["naples","budapest","bali","waco","singapore","tokyo","chicago", "london","prague","positano","dubai", "maldives"]
-
-//choose word randomly
-var computerGuess = destinations[Math.floor(Math.random() * destinations.length)];
+var destinations = ["naples","budapest","bali","waco","singapore","tokyo", "london","prague", "dubai", "maldives"];
+var hints = ["The place that created pizza", "A place in Hungary that George Ezra also made a song about", "One of the Indonesian Islands", "City in Texas made famous by the show 'Fixer Upper'","The city that 'Crazy Rich Asians' takes place in",
+"The most famous city in Japan", "Where Queen Elizabeth and her corgi's reside","A city in the Czech Republic that looks like a fairytale cover", "A city in the UAE known for luxury shopping", "An expensive island located in south asia"];
 
 //global variables
-var rightLetter =[];
-var wrongLetter =[];
-var underScore =[];
+
+var computerGuess = "";
+var lettersOfWord = [];
+var blanks = 0;
+var blanksAndCorrect = [];
+var wrongGuess = [];
+
 
 //counter variables
 var wins = 0;
 var losses = 0;
-var maxGuess = 15;
-var numGuess =0 ;
-
-//testing
-console.log(computerGuess);
-
-//create underscores based on length of word
-var generateUnderscore = function(){
-    for (var i=0; i<computerGuess.length; i++){
-        underScore.push('_'); 
-    }return underScore;
-}
-
-//user guess
-    document.onkeyup = function(event) {
-        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+var guessesRemaining = 15;
 
 
-//everytime the user guesses, increase the number of guesses
-numGuess++;
-maxGuess--;
-if (maxGuess == 0) {
-    alert ("you're out of guesses!");
-}
 
+//game function
 
-//if userGuess letter that is correct
-    if ((computerGuess.indexOf(userGuess) > -1)){
+function Game() {
+    //computer chooses random word from destinations array
+    computerGuess = destinations[Math.floor(Math.random() * destinations.length)];
 
-//add to the right letter array
-        rightLetter.push(userGuess);
+    //split words into separate array and store in a different array
+    lettersOfWord = computerGuess.split("");
 
- //replacing underscore with letter       
-        underScore[computerGuess.indexOf(userGuess)] = userGuess;
-        console.log(computerGuess.indexOf(userGuess));
+    //need the length of each word for the correct underscore display
+    blanks = lettersOfWord.length;
 
-  //if all underscores filled, user wins and score on screen will increase   
-  
-    if(underScore.join('') == computerGuess){
-        alert('you win!');
-        wins++;
-    } 
-        
+    //for loop to give underscores for each letter in the array
+    for (var i=0; i < blanks; i++){
+        blanksAndCorrect.push("_");
     }
-    //all wrong letters get pushed to other array and displayed on the screen
-    else {
-        wrongLetter.push(userGuess);
+
+    //updating the DOM with underscores
+    document.getElementById("underscores").innerHTML = " " + blanksAndCorrect.join(" ");
+
+    console.log(computerGuess);
+
+    if (computerGuess === destinations[0]){
+        document.getElementById("hints").innerHTML = " " + hints[0];
+    }
+
+    else if (computerGuess === destinations[1]){
+        document.getElementById("hints").innerHTML = " " + hints[1];
+    }
+    else if (computerGuess === destinations[2]){
+        document.getElementById("hints").innerHTML = " " + hints[2];
+    }
+    else if (computerGuess === destinations[3]){
+        document.getElementById("hints").innerHTML = " " + hints[3];
+    }
+    else if (computerGuess === destinations[4]){
+        document.getElementById("hints").innerHTML = " " + hints[4];
+    }
+    else if (computerGuess === destinations[5]){
+        document.getElementById("hints").innerHTML = " " + hints[5];
+    }
+    else if (computerGuess === destinations[6]){
+        document.getElementById("hints").innerHTML = " " + hints[6];
+    }
+    else if (computerGuess === destinations[7]){
+        document.getElementById("hints").innerHTML = " " + hints[7];
+    }
+    else if (computerGuess === destinations[8]){
+        document.getElementById("hints").innerHTML = " " + hints[8];
+    }
+    else if (computerGuess === destinations[9]){
+        document.getElementById("hints").innerHTML = " " + hints[9];
+    }
+
+}
+
+//game reset function
+
+function Reset() {
+    guessesRemaining = 15;
+    wrongGuess = [];
+    blanksAndCorrect = [];
+    Game()
+}
+
+//if/else to check if letter appears in the computerGuess
+function checkLetters(letter){
+    var letterInWord = false;
+    for (var i =0; i<blanks; i++){
+        if (computerGuess[i] == letter){
+            letterInWord = true;
         }
+    }
+  //loss
+    if (letterInWord){
+        for (var i=0; i<blanks; i++){
+            if(computerGuess[i] == letter){
+                blanksAndCorrect[i] = letter;
+            }
+        }
+    }  
 
-//once user gets right answer or reaches max guesses, the game will randomly choose another word
+    else {
+        wrongGuess.push(letter);
+        guessesRemaining--;
+    }
+}
 
+//completed game function
 
-console.log(underScore);
-console.log(computerGuess.indexOf(userGuess));
-console.log(userGuess);
-console.log(rightLetter);
-console.log(wrongLetter);
+function complete(){
+    if (lettersOfWord.toString() == blanksAndCorrect.toString()){
+        wins++;
+        Reset();
+        document.getElementById("rightGuess").innerHTML = wins;
+    } else if (guessesRemaining === 0){
+        losses++;
+        Reset();
+        document.getElementById("losses").innerHTML = losses;
+    }
 
+    document.getElementById("underscores").innerHTML = blanksAndCorrect.join(" ");
+    document.getElementById("numberofGuesses").innerHTML = " " + guessesRemaining;
 
-//dom manipulation
+}
 
-document.querySelector('.underscores').textContent = underScore.join(' ');
-document.querySelector('#numberofGuesses').textContent = maxGuess;
-document.querySelector('.wrongGuess').textContent = wrongLetter.join(' ,');
-document.querySelector('.rightGuess').textContent = wins;
-document.querySelector('.losses').textContent = losses;
+//call game
 
-};
+Game()
 
+document.onkeyup = function(event) {
+    var guesses = String.fromCharCode(event.keyCode).toLowerCase();
+    checkLetters(guesses);
+    complete();
 
-//at max guesses, restarts for a new word
-//resetGame()
+    document.getElementById("wrongGuess").innerHTML = " " + wrongGuess.join(" ");
 
-
-
-
+}
 
 
