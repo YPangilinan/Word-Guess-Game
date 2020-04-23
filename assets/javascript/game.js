@@ -1,7 +1,7 @@
 //computer choices for words
 var destinations = ["naples","budapest","bali","waco","singapore","tokyo", "london","prague", "dubai", "maldives"];
-var hints = ["The place that created pizza", "A place in Hungary that George Ezra also made a song about", "One of the Indonesian Islands", "City in Texas made famous by the show 'Fixer Upper'","The city that 'Crazy Rich Asians' takes place in",
-"The most famous city in Japan", "Where Queen Elizabeth and her corgi's reside","A city in the Czech Republic that looks like a fairytale cover", "A city in the UAE known for luxury shopping", "An expensive island located in south asia"];
+var hints = ["The city in Italy that created pizza.", "A place in Hungary that George Ezra also made a song about.", "One of the Indonesian Islands.", "City in Texas made famous by the show 'Fixer Upper'.","The country that 'Crazy Rich Asians' takes place in.",
+"The most famous city in Japan.", "The city Queen Elizabeth and her royal corgi's reside.","A city in the Czech Republic that looks like a fairytale cover.", "A city in the UAE known for luxury shopping.", "An expensive island located in south asia."];
 
 //global variables
 
@@ -15,7 +15,7 @@ var wrongGuess = [];
 //counter variables
 var wins = 0;
 var losses = 0;
-var guessesRemaining = 15;
+var guessesRemaining = 10;
 
 
 
@@ -43,34 +43,44 @@ function Game() {
 
     if (computerGuess === destinations[0]){
         document.getElementById("hints").innerHTML = " " + hints[0];
+        document.getElementById("image").src = "assets/images/naples.jpg";
     }
 
     else if (computerGuess === destinations[1]){
         document.getElementById("hints").innerHTML = " " + hints[1];
+        document.getElementById("image").src = "assets/images/budapest.jpg";
     }
     else if (computerGuess === destinations[2]){
         document.getElementById("hints").innerHTML = " " + hints[2];
+        document.getElementById("image").src = "assets/images/bali.jpg";
     }
     else if (computerGuess === destinations[3]){
         document.getElementById("hints").innerHTML = " " + hints[3];
+        document.getElementById("image").src = "assets/images/waco.jpg";
     }
     else if (computerGuess === destinations[4]){
         document.getElementById("hints").innerHTML = " " + hints[4];
+        document.getElementById("image").src = "assets/images/crazyrich.jpg";
     }
     else if (computerGuess === destinations[5]){
         document.getElementById("hints").innerHTML = " " + hints[5];
+        document.getElementById("image").src = "assets/images/tokyo.jpg";
     }
     else if (computerGuess === destinations[6]){
         document.getElementById("hints").innerHTML = " " + hints[6];
+        document.getElementById("image").src = "assets/images/corgi.jpg";
     }
     else if (computerGuess === destinations[7]){
         document.getElementById("hints").innerHTML = " " + hints[7];
+        document.getElementById("image").src = "assets/images/prague.jpg";
     }
     else if (computerGuess === destinations[8]){
         document.getElementById("hints").innerHTML = " " + hints[8];
+        document.getElementById("image").src = "assets/images/dubai.jpg";
     }
     else if (computerGuess === destinations[9]){
         document.getElementById("hints").innerHTML = " " + hints[9];
+        document.getElementById("image").src = "assets/images/maldives.jpg";
     }
 
 }
@@ -112,10 +122,12 @@ function checkLetters(letter){
 function complete(){
     if (lettersOfWord.toString() == blanksAndCorrect.toString()){
         wins++;
+        alert ("great job guessing where I want to go!");
         Reset();
         document.getElementById("rightGuess").innerHTML = wins;
     } else if (guessesRemaining === 0){
         losses++;
+        alert ("aw darn. guess you're staying inside!");
         Reset();
         document.getElementById("losses").innerHTML = losses;
     }
