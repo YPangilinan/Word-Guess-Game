@@ -1,13 +1,17 @@
 body{
     font-family: 'Bebas Neue', cursive;
     letter-spacing: 2px;
-    background: url("assets/images/background.jpg");
+    background-image: url("assets/images/background.jpg");
     background-color:black;
    
 }
 
 .container{
     background-color:#ffffff;
+}
+
+.header{
+    background-image: url("assests/images/Destinations.jpg");
 }
 
 .responsive{
