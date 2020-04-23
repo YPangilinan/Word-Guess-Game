@@ -1,5 +1,6 @@
 //computer choices for words
 var destinations = ["naples","budapest","bali","waco","singapore","tokyo", "london","prague", "dubai", "maldives"];
+
 var hints = ["The city in Italy that created pizza.", "A place in Hungary that George Ezra also made a song about.", "One of the Indonesian Islands.", "City in Texas made famous by the show 'Fixer Upper'.","The country that 'Crazy Rich Asians' takes place in.",
 "The most famous city in Japan.", "The city Queen Elizabeth and her royal corgi's reside.","A city in the Czech Republic that looks like a fairytale cover.", "A city in the UAE known for luxury shopping.", "An expensive island located in south asia."];
 
