@@ -4,13 +4,11 @@ var hints = ["The city in Italy that created pizza.", "A place in Hungary that G
 "The most famous city in Japan.", "The city Queen Elizabeth and her royal corgi's reside.","A city in the Czech Republic that looks like a fairytale cover.", "A city in the UAE known for luxury shopping.", "An expensive island located in south asia."];
 
 //global variables
-
 var computerGuess = "";
 var letters = [];
-var blanks = 0;
-var blanksAndCorrect = [];
+var totalBlanks = 0;
+var underscore = [];
 var wrongGuess = [];
-
 
 //counter variables
 var wins = 0;
@@ -28,15 +26,15 @@ function wordGuess() {
     letters = computerGuess.split("");
 
     //need the length of each word for the correct underscore display
-    blanks = letters.length;
+    totalBlanks = letters.length;
 
     //for loop to give underscores for each letter in the array
-    for (var i=0; i < blanks; i++){
-        blanksAndCorrect.push("_");
+    for (var i=0; i < totalBlanks; i++){
+        underscore.push("_");
     }
 
     //updating the DOM with underscores of correct length
-    document.getElementById("underscores").innerHTML = " " + blanksAndCorrect.join(" ");
+    document.getElementById("underscores").innerHTML = " " + underscore.join(" ");
 
     // console.log(computerGuess);
 
@@ -95,31 +93,29 @@ function wordGuess() {
 
 }
 //call game function
-
 wordGuess()
 
 document.onkeyup = function(event) {
     var guesses = String.fromCharCode(event.keyCode).toLowerCase();
     checkLetters(guesses);
-    complete();
-
-
+    end();
 }
+
 //if/else to check if letter appears in the computerGuess
 function checkLetters(letter){
     var letterInWord = false;
 
     //win if letter appears in the array
-    for (var i =0; i<blanks; i++){
+    for (var i =0; i<totalBlanks; i++){
         if (computerGuess[i] == letter){
             letterInWord = true;
         }
     }
   //loss logic if letter does not appear in the array
     if (letterInWord){
-        for (var i=0; i<blanks; i++){
+        for (var i=0; i<totalBlanks; i++){
             if(computerGuess[i] == letter){
-                blanksAndCorrect[i] = letter;
+                underscore[i] = letter;
             }
         }
     }  
@@ -135,8 +131,8 @@ function checkLetters(letter){
 
 //game completion function
 
-function complete(){
-    if (letters.toString() == blanksAndCorrect.toString()){
+function end(){
+    if (letters.toString() == underscore.toString()){
         wins++;
         alert ("great job guessing where I want to go!");
         Reset();
@@ -148,18 +144,18 @@ function complete(){
         document.getElementById("losses").innerHTML = losses;
     }
 
-//game reset function after every win/loss
+//game reset after every win/loss
 
 function Reset() {
     wrongGuess = [];
-    blanksAndCorrect = [];
+    underscore = [];
     guessesRemaining = 10;
     wordGuess()
 }
 
 
 //adding to the DOM
-    document.getElementById("underscores").innerHTML = blanksAndCorrect.join(" ");
+    document.getElementById("underscores").innerHTML = underscore.join(" ");
     document.getElementById("numberofGuesses").innerHTML = " " + guessesRemaining;
     document.getElementById("wrongGuess").innerHTML = " " + wrongGuess.join(" ");
 
